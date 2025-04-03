@@ -6,12 +6,10 @@ import example.day03._task.model.entity.CourseEntity;
 import example.day03._task.model.entity.StudentEntity;
 import example.day03._task.model.repository.CourseEntityRepository;
 import example.day03._task.model.repository.StudentEntityRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
