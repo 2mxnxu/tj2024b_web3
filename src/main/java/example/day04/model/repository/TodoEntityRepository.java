@@ -61,5 +61,4 @@ public interface TodoEntityRepository extends JpaRepository<TodoEntity , Integer
     @Modifying
     @Query( value = "update todo set title = :title where id = :id " , nativeQuery = true )
     int updateByNative( int id , String title  );
-
-} //
+}
