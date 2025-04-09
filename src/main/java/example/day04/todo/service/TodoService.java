@@ -1,8 +1,8 @@
-package example.day04.service;
+package example.day04.todo.service;
 
-import example.day04.model.dto.TodoDto;
-import example.day04.model.entity.TodoEntity;
-import example.day04.model.repository.TodoEntityRepository;
+import example.day04.todo.model.dto.TodoDto;
+import example.day04.todo.model.entity.TodoEntity;
+import example.day04.todo.model.repository.TodoEntityRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;

@@ -1,7 +1,7 @@
-package example.day04.controller;
+package example.day04.todo.controller;
 
-import example.day04.model.dto.TodoDto;
-import example.day04.service.TodoService;
+import example.day04.todo.model.dto.TodoDto;
+import example.day04.todo.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
