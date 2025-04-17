@@ -21,13 +21,13 @@ public class ReviewService {
     private final BookRepository bookRepository;
 
     public ReviewDto reviewSave(ReviewDto reviewDto) {
-        ReviewEntity reviewEntity = reviewDto.toReviewEntity();
-        ReviewEntity saveEntity = reviewRepository.save(reviewEntity);
-        if (saveEntity.getRid() > 0) {
-            return saveEntity.toReviewDto();
-        }else {
-            return null;
-        }
+        BookEntity bookEntity = bookRepository.findById(reviewDto.getBid()).orElse(null);
+        if (bookEntity == null) return null;
+
+        ReviewEntity reviewEntity = reviewDto.toReviewEntity(bookEntity);
+
+        ReviewEntity saved = reviewRepository.save(reviewEntity);
+        return saved.toReviewDto();
     }
     public boolean reviewDelete(int rid){
         boolean result = reviewRepository.existsById(rid);
