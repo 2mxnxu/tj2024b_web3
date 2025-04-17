@@ -41,8 +41,12 @@ public class JWTUtil {
                 // 위 정보로 JWT 토큰 생성하고 반환한다.
                 .compact();
         // + 중복 로그인 방지 하고자 웹서버가 아닌 Redis에 토큰 저장
+        // (1) Redis에 토큰 저장하기. opsForValue().set(key,value); , opsForValue.set(계정식별정보, 토큰)
         stringRedisTemplate.opsForValue().set("JWT:"+memail, token, 24, TimeUnit.HOURS);
+        //
         System.out.println(stringRedisTemplate.keys("*"));
+        // (3)
+        System.out.println(stringRedisTemplate.opsForValue().get("JWT:" +memail));
         return token;
     }
     // [2] JWT 토큰 검증
@@ -53,6 +57,13 @@ public class JWTUtil {
                     .build() // 검증 실행, 검증 실패시 예외 발생
                     .parseClaimsJws(token) // 검증할 토근 해석, 실패시 예외 발생
                     .getBody(); // 검증할 토큰 해석, 실패시 예외 발생
+            System.out.println(claims.getSubject());
+            String memail = claims.getSubject();
+            String redisToken = stringRedisTemplate.opsForValue().get("JWT:"+memail);
+            if (token.equals(redisToken)){return memail;}
+            else {
+                System.out.println(">> 중복 로그인 감지");
+            }
             return claims.getSubject();
         }catch (ExpiredJwtException e) {
             System.out.println();
