@@ -28,7 +28,7 @@ public class JWTUtil {
 
     // [1] JWT 토큰 발급 , 사용자의 이메일을 받아서 토큰 만들기
     public String createToken( String memail ){
-        return Jwts.builder()
+        String token = Jwts.builder()
                 // 토큰에 넣을 내용물 , 로그인 성공한 회원의 이메일을 넣는다.
                 .setSubject( memail )
                 // 토큰이 발급된 날짜 , new Date() : 자바에서 제공하는 현재날짜 클래스
@@ -41,7 +41,9 @@ public class JWTUtil {
                 // 위 정보로 JWT 토큰 생성하고 반환한다.
                 .compact();
         // + 중복 로그인 방지 하고자 웹서버가 아닌 Redis에 토큰 저장
-        stringRedisTemplate.opsForValue("JWT:" + memail, token, 1, TimeUnit.DAYS);
+        stringRedisTemplate.opsForValue().set("JWT:"+memail, token, 24, TimeUnit.HOURS);
+        System.out.println(stringRedisTemplate.keys("*"));
+        return token;
     }
     // [2] JWT 토큰 검증
     public String validateToken(String token){
