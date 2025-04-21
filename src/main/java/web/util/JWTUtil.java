@@ -64,10 +64,13 @@ public class JWTUtil {
             else {
                 System.out.println(">> 중복 로그인 감지");
             }
-            return claims.getSubject();
         }catch (ExpiredJwtException e) {
             System.out.println();
         }
         return null;
+    }
+    public void deleteToken(String memail) {
+        stringRedisTemplate.delete("JWT:"+memail);
+        System.out.println(stringRedisTemplate.keys("*"));
     }
 }

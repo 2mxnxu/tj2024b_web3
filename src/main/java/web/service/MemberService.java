@@ -52,4 +52,8 @@ public class MemberService {
         if (memberEntity == null) return null;
         return memberEntity.toDto();
     }
+    public void logout(String token){
+        String memail = jwtUtil.validateToken(token);
+        jwtUtil.deleteToken(memail);
+    }
 }

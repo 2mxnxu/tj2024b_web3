@@ -31,4 +31,8 @@ public class MemberController {
         System.out.println(token);
         return memberService.info(token);
     }
+    @GetMapping("/logout")
+    public void logout(@RequestHeader("Authorization")String token){
+        memberService.logout(token);
+    }
 }
