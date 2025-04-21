@@ -1,11 +1,9 @@
 package web.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import web.model.dto.MemberDto;
-import web.model.entity.MemberEntity;
 import web.service.MemberService;
 
 @RestController // Spring MVC2 controller
