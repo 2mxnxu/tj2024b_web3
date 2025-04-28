@@ -9,7 +9,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-@Component // Spring 컨테이너에 빈 등록
+@Component
 public class JWTUtil {
 
     // 비밀키 알고리즘 : HS256알고리즘 , HS512알고리즘
@@ -42,8 +42,7 @@ public class JWTUtil {
         // (3) 현재 Reids에 저장된 특정한 key의 값 확인 .opsForValue().get( key );
         System.out.println( stringRedisTemplate.opsForValue().get("JWT:"+memail) );
         return token;
-
-    } // f end
+    }
 
     // [2] JWT 토큰 검증
     public String validateToken( String token ){
@@ -74,9 +73,8 @@ public class JWTUtil {
         }
         return null;// 유효하지 않은 토큰 또는 오류 발생시 null 반환
     }
-
     // [3] 로그아웃 시 redis에 저장된 토큰 삭제 서비스
     public void deleteToken( String memail ){
         stringRedisTemplate.delete( "JWT:"+memail );
     }
-} // class end
+}
